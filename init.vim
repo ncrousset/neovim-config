@@ -1,5 +1,6 @@
 set nocompatible 
-filetype plugin indent on
+" filetype indent on
+filetype off
 syntax on
 set encoding=UTF-8
 set tabstop=4
@@ -21,12 +22,25 @@ set cursorline
 set dictionary+=/usr/share/dict/words
 set colorcolumn=80
 set splitbelow splitright " set default position for where a split open
+set fileformat=unix
 
 " Keybindings
 
 " leader keys
 let mapleader=" "
 let maplocalleader=","
+
+set rtp+=~/.config/nvim/Vundle.vim
+let vundle_path="$HOME/.local/share/nvim/site/pack/plugins/start"
+
+call vundle#begin(vundle_path)
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
+
+call vundle#end()
+filetype plugin indent on
+
 
 " faster way to ESC from insert mode
 imap kj <ESC>
