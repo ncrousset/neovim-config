@@ -30,6 +30,8 @@ set fileformat=unix
 let mapleader=" "
 let maplocalleader=","
 
+
+
 set rtp+=~/.config/nvim/Vundle.vim
 let vundle_path="$HOME/.local/share/nvim/site/pack/plugins/start"
 
@@ -37,8 +39,23 @@ call vundle#begin(vundle_path)
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'Townk/vim-autoclose'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+
+Plugin 'vim-scripts/grep.vim'
+Plugin 'vim-scripts/CSApprox'
+
+" python plugin
+Plugin 'zchee/deoplete-jedi'
+
 
 call vundle#end()
+
 filetype plugin indent on
 
 
