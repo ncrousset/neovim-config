@@ -3,6 +3,8 @@ set nocompatible
 filetype off
 syntax on
 set encoding=UTF-8
+set noswapfile
+set scrolloff=7 
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -30,15 +32,14 @@ set fileformat=unix
 let mapleader=" "
 let maplocalleader=","
 
-
-
 set rtp+=~/.config/nvim/Vundle.vim
 let vundle_path="$HOME/.local/share/nvim/site/pack/plugins/start"
 
 call vundle#begin(vundle_path)
 
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
+Plugin 'preservim/nerdtree'
+Plugin 'preservim/nerdcommenter'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
@@ -46,17 +47,27 @@ Plugin 'Townk/vim-autoclose'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
-
+Plugin 'sirver/ultisnips'
 Plugin 'vim-scripts/grep.vim'
 Plugin 'vim-scripts/CSApprox'
 
+Plugin 'jiangmiao/auto-pairs'
+
 " python plugin
 Plugin 'zchee/deoplete-jedi'
+
+Plugin 'norcalli/nvim-colorizer.lua'
 
 
 call vundle#end()
 
 filetype plugin indent on
+
+if(has("termguicolors"))
+    set termguicolors
+endif
+
+lua require 'colorizer'.setup()
 
 
 " faster way to ESC from insert mode
@@ -111,13 +122,38 @@ nnoremap <leader>yy :normal "+yy<CR>
 " add current selected text to X Clipboard
 nnoremap <leader>yy :normal gv"+y<CR>
 
-" colorschemes
 set termguicolors
 colorscheme base16-tomorrow-night
 
 " Airline config
 set noshowmode " hide --insert status line
 let g:airline_theme = 'base16_tomorrow'
+
+" NEARDCommenter
+" nnoremap <C-_> <Plug>NERDCommenterToggle
+" vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
+ 
+
+" NERDTree
+let NERDTreeQuitOnOpen=1
+let g:NERDTreeMinimalUI=1
+" nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
+" Tabs
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#fnamemode=':t'
+nmap <leader>1 :bp<CR>
+nmap <leader>2 :bn<CR>
+nmap <C-q> :bp<CR>
+nmap <C-w> :bn<CR>
+
+" Ultisnips
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/ultisnips']
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 augroup exe_code
     autocmd!
@@ -134,4 +170,3 @@ augroup exe_code
     autocmd FileType bash, sh nnoremap <buffer> <localleader>r
                 \ :sp<CR> :term bash %<CR> :startinsert<CR>
 augroup END
-
